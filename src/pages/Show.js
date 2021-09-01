@@ -3,9 +3,10 @@ import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import Cast from '../component/show/Cast';
 import Details from '../component/show/Details';
-import seasons from '../component/show/Seasons';
+import seasons from '../component/show/seasons';
 import ShowMainPage from '../component/show/ShowMainPage';
 import { apiGet } from '../misc/configue';
+import { InfoBlock, ShowPageWrapper } from './Show.styled';
 
 const reducer = (prevState, action) => {
   switch (action.type) {
@@ -72,7 +73,7 @@ const Show = () => {
   }
 
   return (
-    <div>
+    <ShowPageWrapper>
       <ShowMainPage
         image={show.image}
         name={show.name}
@@ -80,25 +81,25 @@ const Show = () => {
         rating={show.rating}
         summary={show.summary}
       />
-      <div>
+      <InfoBlock>
         <h2>Details</h2>
         <Details
           status={show.status}
           network={show.network}
           premiered={show.premiered}
         />
-      </div>
+      </InfoBlock>
 
-      <div>
+      <InfoBlock>
         <h2>Seasons</h2>
         <seasons season={show._embedded.season} />
-      </div>
+      </InfoBlock>
 
-      <div>
+      <InfoBlock>
         <h2>Cast</h2>
         <Cast cast={show._embedded.cast} />
-      </div>
-    </div>
+      </InfoBlock>
+    </ShowPageWrapper>
   );
 };
 
