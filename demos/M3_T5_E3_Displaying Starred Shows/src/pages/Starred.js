@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import ShowGrid from '../component/show/ShowGrid';
-import Mainpagelayout from '../component/Mainpagelayout';
+import MainPageLayout from '../components/MainPageLayout';
 import { useShows } from '../misc/custom-hooks';
-import { apiGet } from '../misc/configue';
+import { apiGet } from '../misc/config';
+import ShowGrid from '../components/show/ShowGrid';
+
 const Starred = () => {
   const [starred] = useShows();
+
   const [shows, setShows] = useState(null);
-  const [isloading, setisloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     if (starred && starred.length > 0) {
       const promises = starred.map(showId => apiGet(`/shows/${showId}`));
@@ -16,23 +19,24 @@ const Starred = () => {
         .then(apiData => apiData.map(show => ({ show })))
         .then(results => {
           setShows(results);
-          setisloading(false);
+          setIsLoading(false);
         })
         .catch(err => {
           setError(err.message);
+          setIsLoading(false);
         });
     } else {
-      setisloading(false);
+      setIsLoading(false);
     }
   }, [starred]);
 
   return (
-    <Mainpagelayout>
-      {isloading && <div>Shows are still loading</div>}
-      {error && <div>error occured:{error}</div>}
-      {!isloading && !shows && <div>no shows added</div>}
-      {!isloading && !error && shows && <ShowGrid data={shows} />}
-    </Mainpagelayout>
+    <MainPageLayout>
+      {isLoading && <div>Shows are still loading</div>}
+      {error && <div>Error occured: {error}</div>}
+      {!isLoading && !shows && <div>No shows were added</div>}
+      {!isLoading && !error && shows && <ShowGrid data={shows} />}
+    </MainPageLayout>
   );
 };
 

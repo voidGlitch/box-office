@@ -1,8 +1,10 @@
 import React from 'react';
-import IMG_PLACEHOLDER from '../../Images/not-found.png';
+
+import IMG_PLACEHOLDER from '../../images/not-found.png';
 import { Star } from '../styled';
-import { Headline, MainDataWrapper, TagList } from './ShowMainData.styled';
-const ShowMainPage = ({ name, rating, summary, tags, image }) => {
+import { MainDataWrapper, Headline, TagList } from './ShowMainData.styled';
+
+const ShowMainData = ({ name, rating, summary, tags, image }) => {
   return (
     <MainDataWrapper>
       <img src={image ? image.original : IMG_PLACEHOLDER} alt="show-cover" />
@@ -31,5 +33,4 @@ const ShowMainPage = ({ name, rating, summary, tags, image }) => {
     </MainDataWrapper>
   );
 };
-
-export default ShowMainPage;
+export default ShowMainData;
