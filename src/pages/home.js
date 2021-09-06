@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import ActorGrid from '../component/actor/ActorGrid';
+import CustomRadio from '../component/CustomRadio';
 import Mainpagelayout from '../component/Mainpagelayout';
 import ShowGrid from '../component/show/ShowGrid';
 import { apiGet } from '../misc/configue';
 import { useLastQuery } from '../misc/custom-hooks';
+import {
+  SearchInput,
+  RadioInputsWrapper,
+  SearchButtonWrapper,
+} from './home.styled';
 
 const Home = () => {
   // eslint-disable-next-line
@@ -63,40 +69,40 @@ const Home = () => {
 
   return (
     <Mainpagelayout>
-      <input
+      <SearchInput
         type="text"
         placeholder="Search for something"
         onChange={onInputChange}
         value={input}
         onKeyDown={onkeydown}
       />
-      <div>
-        <label htmlFor="shows-search">
-          shows
-          <input
-            type="radio"
+      <RadioInputsWrapper>
+        <div>
+          <CustomRadio
+            label="Shows"
             id="shows-search"
             value="shows"
             checked={isShowSearch}
             onChange={onRadioChange}
-          ></input>
-        </label>
+          />
+        </div>
 
-        <label htmlFor="actors-search">
-          Actors
-          <input
-            type="radio"
+        <div>
+          <CustomRadio
+            label="Actors"
             id="actors-search"
             value="people"
             checked={!isShowSearch}
             onChange={onRadioChange}
-          ></input>
-        </label>
-      </div>
+          />
+        </div>
+      </RadioInputsWrapper>
 
-      <button type="button" onClick={onSearch}>
-        Search
-      </button>
+      <SearchButtonWrapper>
+        <button type="button" onClick={onSearch}>
+          Search
+        </button>
+      </SearchButtonWrapper>
       {renderResults()}
     </Mainpagelayout>
   );
