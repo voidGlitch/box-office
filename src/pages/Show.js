@@ -3,9 +3,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Cast from '../component/show/Cast';
 import Details from '../component/show/Details';
-import seasons from '../component/show/seasons';
 import ShowMainPage from '../component/show/ShowMainPage';
-
+import Seasons from "../component/show/seasons"
 import { useShow } from '../misc/custom-hooks';
 import { InfoBlock, ShowPageWrapper } from './Show.styled';
 
@@ -13,6 +12,7 @@ const Show = () => {
   // eslint-disable-next-line
   const { id } = useParams();
   const { show, isloading, error } = useShow(id);
+  console.log(show);
 
   console.log('show', show);
   if (isloading) {
@@ -40,10 +40,10 @@ const Show = () => {
         />
       </InfoBlock>
 
-      <InfoBlock>
+      {/* <InfoBlock>
         <h2>Seasons</h2>
-        <seasons season={show._embedded.season} />
-      </InfoBlock>
+        <Seasons season={show._embedded.season?show._embedded.season:null} />
+      </InfoBlock> */}
 
       <InfoBlock>
         <h2>Cast</h2>

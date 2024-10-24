@@ -1,10 +1,9 @@
 import React from 'react';
-
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import Home from './pages/home';
 import Show from './pages/Show';
-import { ThemeProvider } from 'styled-components';
 import Starred from './pages/starred';
 
 const theme = {
@@ -15,21 +14,19 @@ const theme = {
   },
 };
 
+function NotFound() {
+  return <div>404 - Page Not Found</div>;
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/starred">
-          <Starred />
-        </Route>
-        <Route exact path="/show/:id">
-          <Show />
-        </Route>
-        <Route>this is 404 page error</Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/starred" element={<Starred />} />
+        <Route path="/show/:id" element={<Show />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </ThemeProvider>
   );
 }

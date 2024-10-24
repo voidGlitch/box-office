@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import ActorGrid from '../component/actor/ActorGrid';
 import CustomRadio from '../component/CustomRadio';
 import Mainpagelayout from '../component/Mainpagelayout';
@@ -10,7 +10,20 @@ import {
   RadioInputsWrapper,
   SearchButtonWrapper,
 } from './home.styled';
-
+const renderResults = results => {
+  //if we try to fetch something which is not available at the site
+  if (results && results.length === 0) {
+    return <div>No results</div>;
+  }
+  if (results && results.length > 0) {
+    return results[0].show ? (
+      <ShowGrid data={results} />
+    ) : (
+      <ActorGrid data={results} />
+    );
+  }
+  return null;
+};
 const Home = () => {
   // eslint-disable-next-line
   const [input, setInput] = useLastQuery();
@@ -34,10 +47,13 @@ const Home = () => {
     });
   };
 
-  const onInputChange = ev => {
-    setInput(ev.target.value);
-    // console.log(ev.target.value); // return the current value we are typing in
-  };
+  const onInputChange = useCallback(
+    ev => {
+      setInput(ev.target.value);
+      // console.log(ev.target.value); // return the current value we are typing in
+    },
+    [setInput]
+  );
 
   const onkeydown = ev => {
     // console.log(ev.keyCode); // return all the number assigned by js to the particular key
@@ -45,27 +61,12 @@ const Home = () => {
       onSearch();
     }
   };
-
-  const onRadioChange = ev => {
+  //usecallback wioll return a value which will only be changed if the input inside it is changed
+  const onRadioChange = useCallback(ev => {
     setSearchoption(ev.target.value);
-  };
+  }, []);
 
   // console.log(searchoption);
-
-  const renderResults = () => {
-    //if we try to fetch something which is not available at the site
-    if (results && results.length === 0) {
-      return <div>No results</div>;
-    }
-    if (results && results.length > 0) {
-      return results[0].show ? (
-        <ShowGrid data={results} />
-      ) : (
-        <ActorGrid data={results} />
-      );
-    }
-    return null;
-  };
 
   return (
     <Mainpagelayout>
@@ -103,7 +104,7 @@ const Home = () => {
           Search
         </button>
       </SearchButtonWrapper>
-      {renderResults()}
+      {renderResults(results)}
     </Mainpagelayout>
   );
 };
