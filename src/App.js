@@ -14,18 +14,19 @@ const theme = {
   },
 };
 
-function NotFound() {
-  return <div>404 - Page Not Found</div>;
-}
+// function NotFound() {
+//   return <div>404 - Page Not Found</div>;
+// }
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/box-office" element={<Home />} />
         <Route path="/starred" element={<Starred />} />
         <Route path="/show/:id" element={<Show />} />
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </ThemeProvider>
   );
