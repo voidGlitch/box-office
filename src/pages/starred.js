@@ -3,11 +3,18 @@ import ShowGrid from '../component/show/ShowGrid';
 import Mainpagelayout from '../component/Mainpagelayout';
 import { useShows } from '../misc/custom-hooks';
 import { apiGet } from '../misc/configue';
+import {
+  LoadingSpinner,
+  ErrorWrapper,
+  EmptyStateWrapper,
+} from './StyledComponents'; // Import styled-components
+
 const Starred = () => {
   const [starred] = useShows();
   const [shows, setShows] = useState(null);
   const [isloading, setisloading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     if (starred && starred.length > 0) {
       const promises = starred.map(showId => apiGet(`/shows/${showId}`));
@@ -28,9 +35,11 @@ const Starred = () => {
 
   return (
     <Mainpagelayout>
-      {isloading && <div>Shows are still loading</div>}
-      {error && <div>error occured:{error}</div>}
-      {!isloading && !shows && <div>no shows added</div>}
+      {isloading && <LoadingSpinner />}
+      {error && <ErrorWrapper>Error occurred: {error}</ErrorWrapper>}
+      {!isloading && !shows && (
+        <EmptyStateWrapper>No shows added</EmptyStateWrapper>
+      )}
       {!isloading && !error && shows && <ShowGrid data={shows} />}
     </Mainpagelayout>
   );
