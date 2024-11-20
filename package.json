@@ -7,14 +7,14 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "firebase": "^11.0.1",
+    "firebase": "^11.0.2",
     "gh-pages": "^6.2.0",
     "node-sass": "^9.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-fade-in": "^2.0.1",
-    "react-router": "^6.27.0",
-    "react-router-dom": "^6.27.0",
+    "react-router": "^6.28.0",
+    "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.13"
   },
@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "ajv": "^7.2.4",
+    "ajv": "^8.17.1",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1"
   }

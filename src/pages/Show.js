@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Cast from '../component/show/Cast';
 import Details from '../component/show/Details';
 import ShowMainPage from '../component/show/ShowMainPage';
-import Seasons from "../component/show/seasons"
+import Seasons from '../component/show/seasons';
 import { useShow } from '../misc/custom-hooks';
 import { InfoBlock, ShowPageWrapper } from './Show.styled';
 
