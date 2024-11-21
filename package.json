@@ -28,7 +28,8 @@
     "format:lint": "npm run format && npm run lint",
     "clear": "rimraf build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "preview": "serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +49,7 @@
   "devDependencies": {
     "ajv": "^8.17.1",
     "prettier": "^3.3.3",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "serve": "^14.2.4"
   }
 }
